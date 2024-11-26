@@ -16,7 +16,7 @@ chmod 755 "$(dirname "$LOG_FILE")"
 chmod 666 "$LOG_FILE"
 
 # Mudar para o diretório do script
-cd tasker_wuzapi
+cd WUZAPI-CHAT-BOT
 
 # Executar o script wuzapi e redirecionar toda a saída para o arquivo de log
 ./wuzapi 2>&1 | tee "$LOG_FILE" || true
