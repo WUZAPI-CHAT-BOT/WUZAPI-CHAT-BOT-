@@ -1,1 +1,76 @@
+# Referência da API
 
+As chamadas à API devem ser efectuadas com o tipo de conteúdo json, e os parâmetros enviados no corpo do pedido, passando sempre o cabeçalho Token para autenticar o pedido.
+
+---
+
+## Webhook
+
+Os seguintes endpoints _webhook_ são usados para obter ou definir o webhook que será chamado sempre que uma mensagem ou evento for recebido. Os tipos de eventos disponíveis são:
+
+* Message
+* ReadReceipt
+* HistorySync
+* ChatPresence
+
+
+## Define o webhook
+
+Configura o webhook a ser chamado usando POST sempre que ocorrer um evento inscrito.
+
+Ponto final: _/webhook_
+
+Método: **POST**
+
+
+```
+curl -s -X POST -H 'Token: 1234ABCD' -H 'Content-Type: application/json' --data '{"webhookURL": "https://some.server/webhook"}' http://localhost:8080/webhook
+```
+Resposta:
+
+```json
+{ 
+  "code": 200, 
+  "data": { 
+    "webhook": "https://example.net/webhook" 
+  }, 
+  "success": true 
+}
+```
+
+---
+
+## Obtém o webhook
+
+Recupera o webhook configurado e os eventos subscritos.
+
+Ponto final: _/webhook_
+
+Method: **GET**
+
+```
+curl -s -X GET -H 'Token: 1234ABCD' http://localhost:8080/webhook
+```
+Resposta:
+```json
+{ 
+  "code": 200, 
+  "data": { 
+    "subscribe": [ "Message" ], 
+    "webhook": "https://example.net/webhook" 
+  }, 
+  "success": true 
+}
+```
+
+---
+
+## Sessão
+
+Os seguintes endpoints _session_ são usados para iniciar uma sessão com os servidores do Whatsapp para enviar e receber mensagens
+
+## Conectar  
+
+Conecta-se aos servidores do Whatsapp. Se não houver uma sessão existente, será iniciada uma leitura de QR que pode ser recuperada através da opção [/session/qr](#user-content-gets-qr-
+
+Traduzido com a versão gratuita do tradutor - DeepL.com
