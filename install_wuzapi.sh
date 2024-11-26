@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# Caminho do arquivo de log
+# Caminho do arquivo de log atualizado
 LOG_FILE="/storage/emulated/0/Tasker/termux/TASKER-WUZAPI/logs/install.log"
 
 # Variável de controle para o log
@@ -26,14 +26,6 @@ monitor_output() {
     while IFS= read -r line; do
         echo "$line"  # Mostrar a saída no terminal
         log_message "$line"  # Registrar no log se habilitado
-
-        # Parar logs se a mensagem específica for encontrada
-        if [[ "$line" == *"QR pairing ok! host=0.0.0.0 role=wuzapi"* ]]; then
-            sleep 5  # Aguardar 5 segundos
-            log_message "CONEXÃO COM SERVIDOR ESTABELECIDA COM SUCESSO"  # Adiciona o log após o atraso
-            LOGGING_ENABLED=0  # Interrompe os logs
-            echo "Logs interrompidos após detectar a mensagem: $line"
-        fi
     done
 }
 
@@ -67,17 +59,17 @@ echo "INSTALANDO GIT E GO"
 log_message "INSTALANDO GIT E GO"
 pkg install -y git golang 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
 
-# Clonar o repositório tasker-wuzapi
-echo "CLONANDO REPOSITÓRIO tasker-wuzapi....."
-log_message "CLONANDO REPOSITÓRIO tasker-wuzapi....."
-git clone https://github.com/Andredye28/tasker_wuzapi 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
+# Clonar o repositório WUZAPI-CHAT-BOT
+echo "CLONANDO REPOSITÓRIO WUZAPI-CHAT-BOT....."
+log_message "CLONANDO REPOSITÓRIO WUZAPI-CHAT-BOT....."
+git clone https://github.com/WUZAPI-CHAT-BOT/WUZAPI-CHAT-BOT 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
 
 # Navegar até o diretório do projeto
-echo "ACESSANDO DIRETÓRIO DO PROJETO tasker-wuzapi"
-log_message "ACESSANDO DIRETÓRIO DO PROJETO tasker-wuzapi"
-cd tasker_wuzapi || { 
-    echo "ERRO AO ACESSAR O DIRETÓRIO DO PROJETO tasker-wuzapi"; 
-    log_message "ERRO AO ACESSAR O DIRETÓRIO DO PROJETO tasker-wuzapi; 
+echo "ACESSANDO DIRETÓRIO DO PROJETO WUZAPI-CHAT-BOT"
+log_message "ACESSANDO DIRETÓRIO DO PROJETO WUZAPI-CHAT-BOT"
+cd WUZAPI-CHAT-BOT || { 
+    echo "ERRO AO ACESSAR O DIRETÓRIO DO PROJETO WUZAPI-CHAT-BOT"; 
+    log_message "ERRO AO ACESSAR O DIRETÓRIO DO PROJETO WUZAPI-CHAT-BOT"; 
     exit 1; 
 }
 
