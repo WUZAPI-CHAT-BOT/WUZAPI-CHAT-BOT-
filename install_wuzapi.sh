@@ -57,11 +57,11 @@ fi
 # Atualizar pacotes e instalar os pacotes necessários
 echo "ATUALIZANDO PACOTES E INSTALANDO DEPENDÊNCIAS BÁSICAS"
 log_message "ATUALIZANDO PACOTES E INSTALANDO DEPENDÊNCIAS BÁSICAS"
-yes | pkg upgrade -y 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
+DEBIAN_FRONTEND=noninteractive pkg upgrade -o Dpkg::Options::="--force-confnew" -y 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
 
 echo "INSTALANDO GIT E GOLANG"
 log_message "INSTALANDO GIT E GOLANG"
-yes | pkg install -y git golang 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
+DEBIAN_FRONTEND=noninteractive pkg install -y git golang 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
 
 # Clonar o repositório WUZAPI-CHAT-BOT
 echo "CLONANDO REPOSITÓRIO WUZAPI-CHAT-BOT....."
