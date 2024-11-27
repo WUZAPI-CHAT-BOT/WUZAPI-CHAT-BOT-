@@ -51,17 +51,17 @@ log_message ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 if [ -d "WUZAPI-CHAT-BOT" ]; then
     rm -rf WUZAPI-CHAT-BOT
     echo "DIRETÓRIO WUZAPI-CHAT-BOT REMOVIDO PARA SER SUBSTITUÍDO"
-    log_message "DIRETÓRIO tasker_wuzapi REMOVIDO PARA SER SUBSTITUÍDO"
+    log_message "DIRETÓRIO WUZAPI-CHAT-BOT REMOVIDO PARA SER SUBSTITUÍDO"
 fi
 
 # Atualizar pacotes e instalar os pacotes necessários
 echo "ATUALIZANDO PACOTES E INSTALANDO DEPENDÊNCIAS BÁSICAS"
 log_message "ATUALIZANDO PACOTES E INSTALANDO DEPENDÊNCIAS BÁSICAS"
-pkg upgrade -y 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
+yes | pkg upgrade -y 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
 
 echo "INSTALANDO GIT E GOLANG"
 log_message "INSTALANDO GIT E GOLANG"
-pkg install -y git golang 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
+yes | pkg install -y git golang 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
 
 # Clonar o repositório WUZAPI-CHAT-BOT
 echo "CLONANDO REPOSITÓRIO WUZAPI-CHAT-BOT....."
