@@ -54,6 +54,12 @@ if [ -d "tasker_wuzapi" ]; then
     log_message "DIRETÓRIO tasker_wuzapi REMOVIDO PARA SER SUBSTITUÍDO"
 fi
 
+# Atualizar pacotes e instalar dependências
+echo "ATUALIZANDO PACOTES E INSTALANDO DEPENDÊNCIAS BÁSICAS"
+log_message "ATUALIZANDO PACOTES E INSTALANDO DEPENDÊNCIAS BÁSICAS"
+pkg upgrade -y 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
+pkg install -y 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
+
 # Instalar Git e Go
 echo "INSTALANDO GIT E GO"
 log_message "INSTALANDO GIT E GO"
