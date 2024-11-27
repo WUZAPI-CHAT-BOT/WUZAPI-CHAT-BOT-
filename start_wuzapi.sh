@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 # Caminho do arquivo de log
-LOG_FILE="/storage/emulated/0/Tasker/termux/TASKER-WUZAPI/logs/reconect.log"
+LOG_FILE="/storage/emulated/0/Tasker/termux/TASKER-WUZAPI/logs/new-users.log"
 
 # Verificar e criar o diretório de logs se não existir
 mkdir -p "$(dirname "$LOG_FILE")"
