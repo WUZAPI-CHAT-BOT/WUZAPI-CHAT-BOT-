@@ -97,4 +97,4 @@ termux-reload-settings 2>&1 | while IFS= read -r line; do monitor_output <<< "$l
 # Executar WuzAPI
 echo "EXECUTANDO API DO WUZAPI"
 log_message "EXECUTANDO API DO WUZAPI"
-bash wuzapi 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
+./wuzapi 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
