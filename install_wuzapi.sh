@@ -35,15 +35,15 @@ cd /data/data/com.termux/files/home
 echo "A INSTALACAO PODE LEVAR ATE 10 MINUTOS POR FAVOR AGUARDE O PROCESSO FINALIZAR"
 log_message ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-                 🚀  INICIANDO PROCESSO DE CONFIGURACAO 🚀
+              🚀  INICIANDO PROCESSO DE CONFIGURACAO 🚀
                          DO TASKER-WUZAPI-CHATBOT
        
 
-                 👋   BEM-VINDO AO TASKER-WUZAPI-CHATBOT   👋          
+              👋   BEM-VINDO AO TASKER-WUZAPI-CHATBOT   👋          
 
 
-                    A INSTALACAO PODE LEVAR ATE 10 MINUTOS
-                    POR FAVOR AGUARDE O PROCESSO FINALIZAR
+                  A INSTALACAO PODE LEVAR ATE 10 MINUTOS
+                  POR FAVOR AGUARDE O PROCESSO FINALIZAR
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 "
@@ -59,9 +59,9 @@ echo "ATUALIZANDO PACOTES E INSTALANDO DEPENDÊNCIAS BÁSICAS"
 log_message "ATUALIZANDO PACOTES E INSTALANDO DEPENDÊNCIAS BÁSICAS"
 DEBIAN_FRONTEND=noninteractive pkg upgrade -o Dpkg::Options::="--force-confnew" -y 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
 
-echo "INSTALANDO GIT E GOLANG"
-log_message "INSTALANDO GIT E GOLANG"
-DEBIAN_FRONTEND=noninteractive pkg install -y git golang 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
+echo "INSTALANDO GIT, GOLANG E FFMPEG"
+log_message "INSTALANDO GIT, GOLANG E FFMPEG"
+yes | DEBIAN_FRONTEND=noninteractive pkg install -y git golang ffmpeg 2>&1 | while IFS= read -r line; do monitor_output <<< "$line"; done
 
 # Clonar o repositório WUZAPI-CHAT-BOT
 echo "CLONANDO REPOSITÓRIO WUZAPI-CHAT-BOT....."
