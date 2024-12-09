@@ -1883,7 +1883,7 @@ func (s *server) SendTemplate() http.HandlerFunc {
 		return
 	}
 }
-
+// Sends a Template message fim 
 // checks if users/phones are on Whatsapp
 func (s *server) CheckUser() http.HandlerFunc {
 
