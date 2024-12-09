@@ -1088,6 +1088,7 @@ func (s *server) SendVideo() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		txtid := r.Context().Value("userinfo").(Values).Get("Id")
+		token := r.Context().Value("userinfo").(Values).Get("Token")
 		userid, _ := strconv.Atoi(txtid)
 		msgid := ""
 		var resp whatsmeow.SendResponse
@@ -1182,13 +1183,8 @@ func (s *server) SendVideo() http.HandlerFunc {
 		}
 
 		log.Info().Str("timestamp", fmt.Sprintf("%d", resp.Timestamp)).Str("id", msgid).Msg("Message sent")
-		response := map[string]interface{}{"Details": "Sent", "Timestamp": resp.Timestamp, "Id": msgid}
-		responseJson, err := json.Marshal(response),whatsmeow.SendRequestExtra{ID: msgid})
-nding message: %v", err)))
-
-g("Message sent")
-
-"Id": msgid, "Token": token}
+		response := map[string]interface{}{"Details": "Sent", "Timestamp": resp.Timestamp, "Id": msgid, "Token": token}
+		responseJson, err := json.Marshal(response)
 		if err != nil {
 			s.Respond(w, r, http.StatusInternalServerError, err)
 		} else {
