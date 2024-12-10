@@ -302,7 +302,6 @@ func (s *server) GetWebhook() http.HandlerFunc {
 		webhook := ""
 		events := ""
 		txtid := r.Context().Value("userinfo").(Values).Get("Id")
-		token := r.Context().Value("userinfo").(Values).Get("Token")
 
 		rows, err := s.db.Query("SELECT webhook,events FROM users WHERE id=? LIMIT 1", txtid)
 		if err != nil {
@@ -325,7 +324,7 @@ func (s *server) GetWebhook() http.HandlerFunc {
 
 		eventarray := strings.Split(events, ",")
 
-		response := map[string]interface{}{"webhook": webhook, "subscribe": eventarray, "token": token}
+		response := map[string]interface{}{"webhook": webhook, "subscribe": eventarray}
 		responseJson, err := json.Marshal(response)
 		if err != nil {
 			s.Respond(w, r, http.StatusInternalServerError, err)
@@ -365,7 +364,7 @@ func (s *server) SetWebhook() http.HandlerFunc {
 		v := updateUserInfo(r.Context().Value("userinfo"), "Webhook", webhook)
 		userinfocache.Set(token, v, cache.NoExpiration)
 
-		response := map[string]interface{}{"webhook": webhook, "token": token}
+		response := map[string]interface{}{"webhook": webhook}
 		responseJson, err := json.Marshal(response)
 		if err != nil {
 			s.Respond(w, r, http.StatusInternalServerError, err)
@@ -1089,7 +1088,6 @@ func (s *server) SendVideo() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		txtid := r.Context().Value("userinfo").(Values).Get("Id")
-		token := r.Context().Value("userinfo").(Values).Get("Token")
 		userid, _ := strconv.Atoi(txtid)
 		msgid := ""
 		var resp whatsmeow.SendResponse
@@ -1184,7 +1182,7 @@ func (s *server) SendVideo() http.HandlerFunc {
 		}
 
 		log.Info().Str("timestamp", fmt.Sprintf("%d", resp.Timestamp)).Str("id", msgid).Msg("Message sent")
-		response := map[string]interface{}{"Details": "Sent", "Timestamp": resp.Timestamp, "Id": msgid, "Token": token}
+		response := map[string]interface{}{"Details": "Sent", "Timestamp": resp.Timestamp, "Id": msgid}
 		responseJson, err := json.Marshal(response)
 		if err != nil {
 			s.Respond(w, r, http.StatusInternalServerError, err)
@@ -2196,7 +2194,6 @@ func (s *server) DownloadImage() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		txtid := r.Context().Value("userinfo").(Values).Get("Id")
-		token := r.Context().Value("userinfo").(Values).Get("Token")
 		userid, _ := strconv.Atoi(txtid)
 
 		mimetype := ""
@@ -2250,7 +2247,7 @@ func (s *server) DownloadImage() http.HandlerFunc {
 		}
 
 		dataURL := dataurl.New(imgdata, mimetype)
-		response := map[string]interface{}{"Mimetype": mimetype, "Data": dataURL.String(), "Token": token}
+		response := map[string]interface{}{"Mimetype": mimetype, "Data": dataURL.String()}
 		responseJson, err := json.Marshal(response)
 		if err != nil {
 			s.Respond(w, r, http.StatusInternalServerError, err)
@@ -2277,7 +2274,6 @@ func (s *server) DownloadDocument() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		txtid := r.Context().Value("userinfo").(Values).Get("Id")
-		token := r.Context().Value("userinfo").(Values).Get("Token")
 		userid, _ := strconv.Atoi(txtid)
 
 		mimetype := ""
@@ -2331,7 +2327,7 @@ func (s *server) DownloadDocument() http.HandlerFunc {
 		}
 
 		dataURL := dataurl.New(docdata, mimetype)
-		response := map[string]interface{}{"Mimetype": mimetype, "Data": dataURL.String(), "Token": token}
+		response := map[string]interface{}{"Mimetype": mimetype, "Data": dataURL.String()}
 		responseJson, err := json.Marshal(response)
 		if err != nil {
 			s.Respond(w, r, http.StatusInternalServerError, err)
@@ -2358,7 +2354,6 @@ func (s *server) DownloadVideo() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		txtid := r.Context().Value("userinfo").(Values).Get("Id")
-		token := r.Context().Value("userinfo").(Values).Get("Token")
 		userid, _ := strconv.Atoi(txtid)
 
 		mimetype := ""
@@ -2412,7 +2407,7 @@ func (s *server) DownloadVideo() http.HandlerFunc {
 		}
 
 		dataURL := dataurl.New(docdata, mimetype)
-		response := map[string]interface{}{"Mimetype": mimetype, "Data": dataURL.String(), "Token": token}
+		response := map[string]interface{}{"Mimetype": mimetype, "Data": dataURL.String()}
 		responseJson, err := json.Marshal(response)
 		if err != nil {
 			s.Respond(w, r, http.StatusInternalServerError, err)
@@ -2515,7 +2510,6 @@ func (s *server) React() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		txtid := r.Context().Value("userinfo").(Values).Get("Id")
-		token := r.Context().Value("userinfo").(Values).Get("Token")
 		userid, _ := strconv.Atoi(txtid)
 
 		if clientPointer[userid] == nil {
@@ -2588,7 +2582,7 @@ func (s *server) React() http.HandlerFunc {
 		}
 
 		log.Info().Str("timestamp", fmt.Sprintf("%d", resp.Timestamp)).Str("id", msgid).Msg("Message sent")
-		response := map[string]interface{}{"Details": "Sent", "Timestamp": resp.Timestamp, "Id": msgid, "Token": token}
+		response := map[string]interface{}{"Details": "Sent", "Timestamp": resp.Timestamp, "Id": msgid}
 		responseJson, err := json.Marshal(response)
 		if err != nil {
 			s.Respond(w, r, http.StatusInternalServerError, err)
