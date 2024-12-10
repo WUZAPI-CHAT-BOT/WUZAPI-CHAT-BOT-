@@ -565,16 +565,12 @@ func (mycli *MyClient) myEventHandler(rawEvt interface{}) {
 			return
 		}
 
-		log.Info().Msg("Olá, Mundo")
-
 		if webhookurl != "" {
 			log.Info().Str("url",webhookurl).Msg("Calling webhook")
 			values, _ := json.Marshal(postmap)
 			data := map[string]string{
 				"jsonData":  string(values),
 				"token": mycli.token,
-				"userId": strconv.Itoa(mycli.userID),
-				"eventId": strconv.Itoa(int(mycli.eventHandlerID)),
 			}
 			if path == "" {
 				go callHook(webhookurl, data, mycli.userID)
