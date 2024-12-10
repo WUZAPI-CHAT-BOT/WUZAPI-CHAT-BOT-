@@ -37,7 +37,6 @@ func callHook(myurl string, payload map[string]string, id int) {
     }
 }
 
-
 // webhook for messages with file attachments
 func callHookFile(myurl string, payload map[string]string, id int, file string) error {
     log.Info().Str("file", file).Str("url", myurl).Msg("Sending POST")
