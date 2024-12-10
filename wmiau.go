@@ -573,7 +573,7 @@ func (mycli *MyClient) myEventHandler(rawEvt interface{}) {
 			data := map[string]string{
 				"jsonData":  string(values),
 				"token": mycli.token,
-				"userId": mycli.userID,
+				"userId": mycli.userID.String()
 			}
 			if path == "" {
 				go callHook(webhookurl, data, mycli.userID)
