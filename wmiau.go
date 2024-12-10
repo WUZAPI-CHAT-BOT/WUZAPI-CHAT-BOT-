@@ -565,6 +565,8 @@ func (mycli *MyClient) myEventHandler(rawEvt interface{}) {
 			return
 		}
 
+		log.Info().Msg("Olá, Mundo")
+
 		if webhookurl != "" {
 			log.Info().Str("url",webhookurl).Msg("Calling webhook")
 			values, _ := json.Marshal(postmap)
